@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VotifyTest"
         mc:Ignorable="d"
-        Title="Popup" Height="200" Width="300">
+        Title="Popup" Height="200" Width="300" WindowStyle="None">
     <Grid>
         <TextBlock Text="zakochana para bartek i paweł hahahaha" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap"/>
     </Grid>

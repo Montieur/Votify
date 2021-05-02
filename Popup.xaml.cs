@@ -11,13 +11,6 @@ namespace VotifyTest
     {
         double SCREEN_WIDTH = SystemParameters.PrimaryScreenWidth;
         double SCREEN_HEIGHT = SystemParameters.PrimaryScreenHeight;
-        
-        bool moveUp = true;
-
-        //DispatcherTimer timer = new DispatcherTimer()
-        //{
-        //    Interval = TimeSpan.FromTicks(10000)
-        //};
 
         public Popup()
         {
@@ -27,17 +20,11 @@ namespace VotifyTest
             MoveUp(10);
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            
-        }
-
-
-
         private void MoveUp(int step)
         {
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromTicks(10000);
+
             timer.Tick += (s, e) => {
                 Top -= step;
                 if(Top < SCREEN_HEIGHT - Height)
@@ -76,8 +63,6 @@ namespace VotifyTest
             };
             timer.Start();
         }
-
-        DispatcherTimer t = new DispatcherTimer();
 
     }
 }
