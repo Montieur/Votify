@@ -11,39 +11,73 @@ namespace VotifyTest
     {
         double SCREEN_WIDTH = SystemParameters.PrimaryScreenWidth;
         double SCREEN_HEIGHT = SystemParameters.PrimaryScreenHeight;
-        int i = 0;
+        
         bool moveUp = true;
 
-        DispatcherTimer timer = new DispatcherTimer()
-        {
-            Interval = TimeSpan.FromTicks(10000)
-        };
+        //DispatcherTimer timer = new DispatcherTimer()
+        //{
+        //    Interval = TimeSpan.FromTicks(10000)
+        //};
 
         public Popup()
         {
             InitializeComponent();
             Top = SCREEN_HEIGHT;
             Left = SCREEN_WIDTH - Width;
-            timer.Tick += Timer_Tick;
-            timer.Start();
-            //moveAnimation();
+            MoveUp(10);
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (moveUp)
-            {
-                i += 10;
-                Top -= 10;
-                if (i >= Height) moveUp = false;
-            }
-            else
-            {
-                i -= 10;
-                Top += 10;
-                if (i <= 0) moveUp = true;
-            }   
+            
         }
+
+
+
+        private void MoveUp(int step)
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromTicks(10000);
+            timer.Tick += (s, e) => {
+                Top -= step;
+                if(Top < SCREEN_HEIGHT - Height)
+                {
+                    Wait(3, step);
+                    timer.Stop();
+                }
+            };
+            timer.Start();
+            
+        }
+
+        private void Wait(int freezeTime, int step)
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(freezeTime);
+            timer.Tick += (s, e) => {
+                MoveDown(step);
+                timer.Stop();
+            };
+            timer.Start();
+        }
+
+        private void MoveDown(int step)
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromTicks(10000);
+            timer.Tick += (s, e) => {
+                Top += step;
+                if (Top > SCREEN_HEIGHT)
+                {
+                    timer.Stop();
+                    Close();
+                } 
+
+            };
+            timer.Start();
+        }
+
+        DispatcherTimer t = new DispatcherTimer();
 
     }
 }
