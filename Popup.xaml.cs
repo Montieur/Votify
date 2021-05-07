@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Media;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -11,10 +12,14 @@ namespace VotifyTest
     {
         double SCREEN_WIDTH = SystemParameters.PrimaryScreenWidth;
         double SCREEN_HEIGHT = SystemParameters.PrimaryScreenHeight;
-
-        public Popup()
+        int TimeDisplayNotices;
+        public Popup(int TimeDisplayNotices, string Theme, string Descroption)
         {
             InitializeComponent();
+            SystemSounds.Beep.Play();
+            this.TimeDisplayNotices = TimeDisplayNotices;
+            textBlockTheme.Text = Theme;
+            textBlockDescription.Text = Descroption;
             Top = SCREEN_HEIGHT;
             Left = SCREEN_WIDTH - Width;
             MoveUp(10);
@@ -29,7 +34,7 @@ namespace VotifyTest
                 Top -= step;
                 if(Top < SCREEN_HEIGHT - Height)
                 {
-                    Wait(3, step);
+                    Wait(TimeDisplayNotices, step);
                     timer.Stop();
                 }
             };
@@ -47,6 +52,7 @@ namespace VotifyTest
             };
             timer.Start();
         }
+
 
         private void MoveDown(int step)
         {
