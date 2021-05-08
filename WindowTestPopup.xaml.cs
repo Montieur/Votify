@@ -26,8 +26,9 @@ namespace VotifyTest
 
         private void buttonTestujPowiadomienie_Click(object sender, RoutedEventArgs e)
         {
-            Popup popup = new Popup(textBoxTheme.Text, textBoxDescription.Text);
-            popup.Show();
+            //var response = Controller.PostAsync();
+            //Popup popup = new Popup(Controller.ResponseToString(response), textBoxDescription.Text);
+            //popup.Show();
         }
     }
 }
