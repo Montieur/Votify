@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Media;
 using System.Windows;
 using System.Windows.Threading;
+using System.Speech.Synthesis;
+using System.Collections.Generic;
 
 namespace VotifyTest
 {
@@ -9,14 +12,18 @@ namespace VotifyTest
     /// </summary>
     public partial class Popup : Window
     {
+        SpeechSynthesizer synth = new SpeechSynthesizer();
         double SCREEN_WIDTH = SystemParameters.PrimaryScreenWidth;
         double SCREEN_HEIGHT = SystemParameters.PrimaryScreenHeight;
-
-        public Popup()
+        public Popup(string Theme, string Descroption)
         {
             InitializeComponent();
-            Top = SCREEN_HEIGHT;
-            Left = SCREEN_WIDTH - Width;
+            SystemSounds.Beep.Play();
+            synth.SetOutputToDefaultAudioDevice();
+            textBlockTheme.Text = Theme;
+            textBlockDescription.Text = Descroption;
+            this.Top = SCREEN_HEIGHT; 
+            this.Left = SCREEN_WIDTH - Width;
             MoveUp(10);
         }
 
@@ -26,10 +33,10 @@ namespace VotifyTest
             timer.Interval = TimeSpan.FromTicks(10000);
 
             timer.Tick += (s, e) => {
-                Top -= step;
-                if(Top < SCREEN_HEIGHT - Height)
+                this.Top -= step;
+                if(this.Top < SCREEN_HEIGHT - Height)
                 {
-                    Wait(3, step);
+                    Wait(step);
                     timer.Stop();
                 }
             };
@@ -37,16 +44,23 @@ namespace VotifyTest
             
         }
 
-        private void Wait(int freezeTime, int step)
+        private void Wait(int step)
         {
+            synth.SpeakAsync(generateSpeechText(textBlockTheme.Text,textBlockDescription.Text));
             DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(freezeTime);
+            //Co sekunda sprawdzanie czy tekst został zakończony
+            timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += (s, e) => {
-                MoveDown(step);
-                timer.Stop();
+                if (synth.GetCurrentlySpokenPrompt() == null)
+                {
+                    MoveDown(step);
+                    timer.Stop();
+                }
             };
             timer.Start();
+            
         }
+
 
         private void MoveDown(int step)
         {
@@ -57,11 +71,29 @@ namespace VotifyTest
                 if (Top > SCREEN_HEIGHT)
                 {
                     timer.Stop();
-                    Close();
+                    this.Close();
                 } 
 
             };
             timer.Start();
+
+        }
+        private PromptBuilder generateSpeechText(string Thema,string Descroption)
+        {
+            PromptBuilder TextSpeech = new PromptBuilder(new System.Globalization.CultureInfo("pl-PL"));
+            TextSpeech.StartParagraph();
+            TextSpeech.StartSentence();
+            TextSpeech.AppendText("Powiadomienie!");
+            TextSpeech.EndSentence();
+            TextSpeech.StartSentence();
+            TextSpeech.AppendText(Thema);
+            TextSpeech.EndSentence();
+            TextSpeech.StartSentence();
+            TextSpeech.AppendText(Descroption);
+            TextSpeech.EndSentence();
+            TextSpeech.EndParagraph();
+
+            return TextSpeech;
         }
 
     }
