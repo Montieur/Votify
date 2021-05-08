@@ -38,7 +38,7 @@ namespace VotifyTest
                 this.Top -= step;
                 if(this.Top < SCREEN_HEIGHT - Height)
                 {
-                    Wait(TimeDisplayNotices, step);
+                    Wait(step);
                     timer.Stop();
                 }
             };
@@ -46,14 +46,18 @@ namespace VotifyTest
             
         }
 
-        private void Wait(int freezeTime, int step)
+        private void Wait(int step)
         {
-            synth.Speak(generateSpeechText(textBlockTheme.Text,textBlockDescription.Text));
+            synth.SpeakAsync(generateSpeechText(textBlockTheme.Text,textBlockDescription.Text));
             DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(freezeTime);
+            //Co sekunda sprawdzanie czy tekst został zakończony
+            timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += (s, e) => {
-                MoveDown(step);
-                timer.Stop();
+                if (synth.GetCurrentlySpokenPrompt() == null)
+                {
+                    MoveDown(step);
+                    timer.Stop();
+                }
             };
             timer.Start();
             
