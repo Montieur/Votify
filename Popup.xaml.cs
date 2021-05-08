@@ -15,13 +15,11 @@ namespace VotifyTest
         SpeechSynthesizer synth = new SpeechSynthesizer();
         double SCREEN_WIDTH = SystemParameters.PrimaryScreenWidth;
         double SCREEN_HEIGHT = SystemParameters.PrimaryScreenHeight;
-        int TimeDisplayNotices;
-        public Popup(int TimeDisplayNotices, string Theme, string Descroption)
+        public Popup(string Theme, string Descroption)
         {
             InitializeComponent();
             SystemSounds.Beep.Play();
             synth.SetOutputToDefaultAudioDevice();
-            this.TimeDisplayNotices = TimeDisplayNotices;
             textBlockTheme.Text = Theme;
             textBlockDescription.Text = Descroption;
             this.Top = SCREEN_HEIGHT; 

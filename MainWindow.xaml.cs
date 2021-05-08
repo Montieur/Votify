@@ -29,7 +29,7 @@ namespace VotifyTest
 
         private void popupButton_Click(object sender, RoutedEventArgs e)
         {
-            Popup popup = new Popup(3,"Temat testowy","Albert Albert ty łysy gnoju") ;
+            Popup popup = new Popup("Temat testowy","Albert Albert ty łysy gnoju") ;
             popup.Show();
         }
 
