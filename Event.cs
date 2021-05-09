@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VotifyTest
 {
-    class Event
+    public class Event
     {
         public date date;
         public string title;
@@ -20,10 +20,13 @@ namespace VotifyTest
             this.description = description;
             this.id = id;
         }
-
+        public override string ToString()
+        {
+            return "Title:" + this.title + " Description: "+this.description+" Start:"+this.date.start+" End:"+this.date.end;
+        }
     }
 
-    class date
+    public class date
     {
         public DateTime start;
         public DateTime end;
