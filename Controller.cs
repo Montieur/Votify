@@ -29,22 +29,6 @@ namespace VotifyTest
                     URL: /api/auth/events
         */
 
-        public static async Task<string> PostAsync()
-        {
-            var values = new Dictionary<string, string>
-            {
-                { "login", "login" },
-                { "password", "password1" }
-            };
-
-            var content = new FormUrlEncodedContent(values);
-
-            var response = httpClient.PostAsync("http://127.0.0.1/api/authenticate", content).Result;
-
-            var responseString = response.Content.ReadAsStringAsync();
-
-            return await responseString;
-        }
 
         private static async Task<string> SendLoginRequest(string login, string password)
         {
@@ -66,12 +50,79 @@ namespace VotifyTest
 
         public static string Login(string login, string password)
         {
-            var s = SendLoginRequest(login, password);
+            var Request = SendLoginRequest(login, password);
 
-            JObject parsedJSON = JObject.Parse(s.Result);
+            JObject parsedJSON = JObject.Parse(Request.Result);
 
             return (string)parsedJSON["token"];
         }
+        private static async Task<string> CreateEventsResponse(string Token, string Name, string Desc, string startDate, string endDate)
+        {
+            if (!httpClient.DefaultRequestHeaders.Contains("Auth"))
+                httpClient.DefaultRequestHeaders.Add("Auth", Token);
 
+            var body = new Dictionary<string, string>
+            {
+                { "name", Name },
+                { "desc", Desc },
+                { "startDate", startDate },
+                { "endDate", endDate }
+            };
+
+            var content = new FormUrlEncodedContent(body);
+
+            var response = httpClient.PostAsync("http://127.0.0.1/api/auth/events", content).Result;
+
+            var responseString = response.Content.ReadAsStringAsync();
+
+            return await responseString;
+        }
+
+
+        public static string CreateEvents(string Token,string Name,string Desc,string startDate,string endDate)
+        {
+            var Request = CreateEventsResponse(Token,  Name,  Desc,  startDate,  endDate);
+
+            return Request.Result;
+  
+        }
+        private static async Task<string> SendResponseEvent(string Token)
+        {
+            if(!httpClient.DefaultRequestHeaders.Contains("Auth"))
+                httpClient.DefaultRequestHeaders.Add("Auth", Token);
+
+            var requestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+
+                RequestUri = new Uri("http://127.0.0.1/api/auth/events")
+            };
+
+            var response = httpClient.SendAsync(requestMessage).Result;
+            var responsecode = response.StatusCode;
+
+            var test = requestMessage.Headers;
+            var responseString = response.Content.ReadAsStringAsync();
+
+
+            return await responseString;
+
+        }
+
+        public static List<Event> GetEventFromResponse(string Token)
+        {
+            Task<string> EventsResponse = SendResponseEvent(Token);
+            JObject parsedJSON = JObject.Parse(EventsResponse.Result);
+            EventsResponse.Dispose();
+            List<Event> ListEvents = new List<Event>();
+
+            foreach(var element in parsedJSON["events"])
+            {
+                Event _Temp = new Event((string)element["date"]["start"], (string)element["date"]["end"], (string)element["title"], (string)element["description"], (int)element["id"]);
+                ListEvents.Add(_Temp);
+            }
+
+            return ListEvents;
+        }
     }
 }
