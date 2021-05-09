@@ -1,0 +1,18 @@
+﻿<Window x:Class="VotifyTest.WindowTestDeveloper"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VotifyTest"
+        mc:Ignorable="d"
+        Title="WindowTestDeveloper" Height="450" Width="800" Closed="Window_Closed">
+    <Grid>
+        <TextBox x:Name="textBoxTitle" Text="Title" HorizontalAlignment="Left" Height="147" Margin="10,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="289"/>
+        <TextBox x:Name="textBoxDescription" Text="Description" HorizontalAlignment="Left" Height="139" Margin="10,172,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="289"/>
+        <Button x:Name="buttonInstantPopup" Content="Instant" HorizontalAlignment="Left" Margin="206,316,0,0" VerticalAlignment="Top" Width="93" Height="60" Click="buttonInstantPopup_Click"/>
+        <Button x:Name="buttonEnforceGetEvents" Content="Enforce Get Events" HorizontalAlignment="Left" Margin="632,277,0,0" VerticalAlignment="Top" Width="150" Height="65" Click="buttonEnforceGetEvents_Click"/>
+        <ListBox x:Name="listBoxEvents" HorizontalAlignment="Left" Height="242" Margin="304,10,0,0" VerticalAlignment="Top" Width="478"/>
+        <Button x:Name="buttonCreateEvent" Content="Create Event" HorizontalAlignment="Left" Margin="10,318,0,0" VerticalAlignment="Top" Width="150" Height="60" Click="buttonCreateEvent_Click"/>
+        <Label x:Name="labelWhatIsTime" Content="" HorizontalAlignment="Left" Margin="10,386,0,0" VerticalAlignment="Top" Width="353"/>
+    </Grid>
+</Window>

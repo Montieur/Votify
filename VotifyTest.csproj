@@ -60,6 +60,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controller.cs" />
+    <Compile Include="Event.cs" />
+    <Compile Include="WindowTestDeveloper.xaml.cs">
+      <DependentUpon>WindowTestDeveloper.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowTestPopup.xaml.cs">
       <DependentUpon>WindowTestPopup.xaml</DependentUpon>
     </Compile>
@@ -83,6 +87,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Popup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowTestDeveloper.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

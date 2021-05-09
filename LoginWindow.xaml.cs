@@ -36,8 +36,8 @@ namespace VotifyTest
             if (response != null)
             {
                 this.Hide();
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.Show();
+                WindowTestDeveloper WindowTestDeveloper = new WindowTestDeveloper(response);
+                WindowTestDeveloper.Show();
             }
             else
             {
