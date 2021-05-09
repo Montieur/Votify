@@ -18,7 +18,6 @@ namespace VotifyTest
         public Popup(string Theme, string Descroption)
         {
             InitializeComponent();
-            SystemSounds.Beep.Play();
             synth.SetOutputToDefaultAudioDevice();
             textBlockTheme.Text = Theme;
             textBlockDescription.Text = Descroption;

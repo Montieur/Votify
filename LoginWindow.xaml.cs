@@ -19,11 +19,32 @@ namespace VotifyTest
     /// </summary>
     public partial class LoginWindow : Window
     {
+
         public LoginWindow()
         {
+            
             Width = SystemParameters.PrimaryScreenWidth / 4;
             Height = SystemParameters.PrimaryScreenHeight / 3;
             InitializeComponent();
+        }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            var response = Controller.Login(LoginBox.Text, PasswordBox.Password);
+
+            if (response != null)
+            {
+                this.Hide();
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Wprowadzono niepoprawne dane logowania!");
+            }
+            
+
         }
     }
 }

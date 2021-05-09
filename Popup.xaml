@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Popup" Height="200" Width="300" WindowStyle="None">
     <Grid>
-        <Viewbox HorizontalAlignment="Left" Height="71" Margin="10,10,0,0" VerticalAlignment="Top" Width="272">
-            <TextBlock x:Name="textBlockTheme" Text="" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="2.234,-0.077"  TextWrapping="Wrap" />
+        <Viewbox HorizontalAlignment="Left" Height="71" Margin="10,10,0,0" VerticalAlignment="Top" Width="272" >
+            <TextBlock x:Name="textBlockTheme" Text="" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" />
         </Viewbox>
         <Viewbox HorizontalAlignment="Left" Height="96" Margin="10,86,0,0" VerticalAlignment="Top" Width="272" >
             <TextBlock x:Name="textBlockDescription" Text="" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" />
