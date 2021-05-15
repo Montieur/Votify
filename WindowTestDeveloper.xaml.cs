@@ -22,7 +22,7 @@ namespace VotifyTest
         private System.Windows.Threading.DispatcherTimer timerSynch;
         private System.Windows.Threading.DispatcherTimer timerDisplayPopup;
         private System.Windows.Threading.DispatcherTimer timmerWhatIsTime;
-        int TimeStatus = 1;
+        int TimeStatus = 0;
         private string Token;
         private List<Event> Events;
         public WindowTestDeveloper(string Token)
@@ -31,7 +31,6 @@ namespace VotifyTest
             this.Token = Token;
             InitTimerSynch();
             InitTimerDisplayPopup();
-            InitWhatIsTime();
 
 
 
@@ -56,16 +55,18 @@ namespace VotifyTest
                 {
                     if (ev.date.start.Hour == DateTime.Now.Hour && ev.date.start.Minute == DateTime.Now.Minute)
                     {
-                        Popup Popup = new Popup(ev.title, ev.description);
+                        Popup Popup = new Popup(ev);
                         Popup.Show();
                     }
                 }
+                TimeStatus = 0;
             };
             timerDisplayPopup.Start();
         }
         private void InitTimerSynch()
         {
             timerSynch = new System.Windows.Threading.DispatcherTimer();
+            InitWhatIsTime();
             timerSynch.Interval = TimeSpan.FromSeconds(30);
             timerSynch.Tick += (s, e) => {
                     Events = Controller.GetEventFromResponse(Token);
@@ -75,7 +76,8 @@ namespace VotifyTest
         }
         private void buttonInstantPopup_Click(object sender, RoutedEventArgs e)
         {
-            Popup Popup = new Popup(textBoxTitle.Text, textBoxDescription.Text);
+            Event TempEvent = new Event(new DateTime().ToString(), new DateTime().AddMinutes(1).ToString(), textBoxTitle.Text, textBoxDescription.Text, -1);
+            Popup Popup = new Popup(TempEvent);
             Popup.Show();
         }
 

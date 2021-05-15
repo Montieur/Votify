@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VotifyTest"
         mc:Ignorable="d"
-        Title="Popup" Height="200" Width="300" WindowStyle="None">
+        Title="Popup" Height="200" Width="300" WindowStyle="None" Loaded="Popup_Loaded">
     <Grid>
         <Viewbox HorizontalAlignment="Left" Height="71" Margin="10,10,0,0" VerticalAlignment="Top" Width="272" >
             <TextBlock x:Name="textBlockTheme" Text="" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" />
