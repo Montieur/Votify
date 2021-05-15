@@ -54,7 +54,7 @@ namespace VotifyTest
 
             JObject parsedJSON = JObject.Parse(Request.Result);
 
-            if (parsedJSON["message"].ToString() == "Logged in")
+            if (parsedJSON["message"].ToString() == "Logged in") //Login successful
             {
                 string _Token = parsedJSON["token"].ToString();
                 Models.User _User = new Models.User(int.Parse(parsedJSON["user"]["UserId"].ToString()), parsedJSON["user"]["UserLogin"].ToString(), parsedJSON["user"]["UserEmail"].ToString(), parsedJSON["user"]["UserName"].ToString());

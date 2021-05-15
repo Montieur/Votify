@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace VotifyTest.Models
 {
-    class DataFromAuthorization
+    public class DataFromAuthorization
     {
+        public string Token { get; set; }
+        public User User { get; set; }
+
+        public DataFromAuthorization(string Token, User User)
+        {
+            this.Token = Token;
+            this.User = User;
+        }
     }
 }

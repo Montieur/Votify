@@ -8,33 +8,33 @@ namespace VotifyTest
 {
     public class Event
     {
-        public date date;
-        public string title;
-        public string description;
-        private int id;
+        public Date Date;
+        public string Title;
+        public string Description;
+        private int Id;
 
-        public Event(string start, string end, string title, string description, int id)
+        public Event(string Start, string End, string Title, string Description, int Id)
         {
-            this.date = new date(start, end);
-            this.title = title;
-            this.description = description;
-            this.id = id;
+            this.Date = new Date(Start, End);
+            this.Title = Title;
+            this.Description = Description;
+            this.Id = Id;
         }
         public override string ToString()
         {
-            return "Title:" + this.title + " Description: "+this.description+" Start:"+this.date.start+" End:"+this.date.end;
+            return "Title:" + this.Title + " Description: "+this.Description+" Start:"+this.Date.Start+" End:"+this.Date.End;
         }
     }
 
-    public class date
+    public class Date
     {
-        public DateTime start;
-        public DateTime end;
+        public DateTime Start;
+        public DateTime End;
 
-        public date(string start, string end)
+        public Date(string Start, string End)
         {
-            this.start = DateTime.Parse(start);
-            this.end = DateTime.Parse(end);
+            this.Start = DateTime.Parse(Start);
+            this.End = DateTime.Parse(End);
         }
     }
 
