@@ -48,13 +48,28 @@ namespace VotifyTest
         }
 
 
-        public static string Login(string login, string password)
+        public static Models.DataFromAuthorization Login(string login, string password)
         {
             var Request = SendLoginRequest(login, password);
 
             JObject parsedJSON = JObject.Parse(Request.Result);
 
-            return (string)parsedJSON["token"];
+            if (parsedJSON["message"].ToString() == "Logged in") //Login successful
+            {
+                string _Token = parsedJSON["token"].ToString();
+                Models.User _User = new Models.User(int.Parse(parsedJSON["user"]["UserId"].ToString()), parsedJSON["user"]["UserLogin"].ToString(), parsedJSON["user"]["UserEmail"].ToString(), parsedJSON["user"]["UserName"].ToString());
+                Models.DataFromAuthorization _DataFromAuthorization = new Models.DataFromAuthorization(_Token, _User);
+
+                return _DataFromAuthorization;
+            }
+            else
+            {
+                return null;
+            }
+                
+           
+
+            
         }
         private static async Task<string> CreateEventsResponse(string Token, string Name, string Desc, string startDate, string endDate)
         {

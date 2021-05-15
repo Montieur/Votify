@@ -22,21 +22,18 @@ namespace VotifyTest
 
         public LoginWindow()
         {
-            
-            Width = SystemParameters.PrimaryScreenWidth / 4;
-            Height = SystemParameters.PrimaryScreenHeight / 3;
             InitializeComponent();
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
 
-            var response = Controller.Login(LoginBox.Text, PasswordBox.Password);
+            Models.DataFromAuthorization response = Controller.Login(LoginBox.Text, PasswordBox.Password);
 
             if (response != null)
             {
                 this.Hide();
-                WindowTestDeveloper WindowTestDeveloper = new WindowTestDeveloper(response);
+                WindowTestDeveloper WindowTestDeveloper = new WindowTestDeveloper(response.Token,response.User);
                 WindowTestDeveloper.Show();
             }
             else

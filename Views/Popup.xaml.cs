@@ -24,8 +24,8 @@ namespace VotifyTest
         }
         private void Popup_Loaded(object sender, RoutedEventArgs e)
         {
-            textBlockTheme.Text = Event.title;
-            textBlockDescription.Text = Event.description;
+            textBlockTheme.Text = Event.Title;
+            textBlockDescription.Text = Event.Description;
             MoveUp(10);
         }
  
@@ -89,10 +89,10 @@ namespace VotifyTest
             TextSpeech.AppendText("Powiadomienie!");
             TextSpeech.EndSentence();
             TextSpeech.StartSentence();
-            TextSpeech.AppendText(Event.title);
+            TextSpeech.AppendText(Event.Title);
             TextSpeech.EndSentence();
             TextSpeech.StartSentence();
-            TextSpeech.AppendText(Event.description);
+            TextSpeech.AppendText(Event.Description);
             TextSpeech.EndSentence();
             TextSpeech.EndParagraph();
 

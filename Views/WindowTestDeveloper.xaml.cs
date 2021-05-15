@@ -25,10 +25,12 @@ namespace VotifyTest
         int TimeStatus = 0;
         private string Token;
         private List<Event> Events;
-        public WindowTestDeveloper(string Token)
+        private Models.User User;
+        public WindowTestDeveloper(string Token, Models.User User)
         {
             InitializeComponent();
             this.Token = Token;
+            this.User = User;
             InitTimerSynch();
             InitTimerDisplayPopup();
 
@@ -53,7 +55,7 @@ namespace VotifyTest
             timerDisplayPopup.Tick += (s, e) => {
                 foreach (Event ev in Events)
                 {
-                    if (ev.date.start.Hour == DateTime.Now.Hour && ev.date.start.Minute == DateTime.Now.Minute)
+                    if (ev.Date.Start.Hour == DateTime.Now.Hour && ev.Date.Start.Minute == DateTime.Now.Minute)
                     {
                         Popup Popup = new Popup(ev);
                         Popup.Show();
