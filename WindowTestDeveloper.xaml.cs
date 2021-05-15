@@ -43,14 +43,14 @@ namespace VotifyTest
             timmerWhatIsTime.Tick += (s, e) => {
                 TimeStatus++;
 
-                labelWhatIsTime.Content = "Sync: " + (30-(TimeStatus % 30)).ToString() + " Popup: " + (10-(TimeStatus % 10)).ToString();
+                labelWhatIsTime.Content = "Sync: " + (30-(TimeStatus % 30)).ToString() + " Popup: " + (60-(TimeStatus % 60)).ToString();
             };
             timmerWhatIsTime.Start();
         }
         private void InitTimerDisplayPopup()
         {
             timerDisplayPopup = new System.Windows.Threading.DispatcherTimer();
-            timerDisplayPopup.Interval = TimeSpan.FromSeconds(10);
+            timerDisplayPopup.Interval = TimeSpan.FromSeconds(60);
             timerDisplayPopup.Tick += (s, e) => {
                 foreach (Event ev in Events)
                 {
@@ -59,9 +59,7 @@ namespace VotifyTest
                         Popup Popup = new Popup(ev.title, ev.description);
                         Popup.Show();
                     }
-                       
                 }
-                
             };
             timerDisplayPopup.Start();
         }

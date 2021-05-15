@@ -79,11 +79,14 @@ namespace VotifyTest
         }
 
 
-        public static string CreateEvents(string Token,string Name,string Desc,string startDate,string endDate)
+        public static bool CreateEvents(string Token,string Name,string Desc,string startDate,string endDate)
         {
             var Request = CreateEventsResponse(Token,  Name,  Desc,  startDate,  endDate);
 
-            return Request.Result;
+            if (Request.Status == TaskStatus.Created)
+                return true;
+            else
+                return false;
   
         }
         private static async Task<string> SendResponseEvent(string Token)
