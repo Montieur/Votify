@@ -59,8 +59,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controller.cs" />
-    <Compile Include="Event.cs" />
+    <Compile Include="Models\Controller.cs" />
+    <Compile Include="Models\Event.cs" />
     <Compile Include="WindowTestDeveloper.xaml.cs">
       <DependentUpon>WindowTestDeveloper.xaml</DependentUpon>
     </Compile>
