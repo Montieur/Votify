@@ -7,24 +7,28 @@ using System.Collections.Generic;
 
 namespace VotifyTest
 {
-    /// <summary>
-    /// Interaction logic for Popup.xaml
-    /// </summary>
     public partial class Popup : Window
     {
-        SpeechSynthesizer synth = new SpeechSynthesizer();
-        double SCREEN_WIDTH = SystemParameters.PrimaryScreenWidth;
-        double SCREEN_HEIGHT = SystemParameters.PrimaryScreenHeight;
-        public Popup(string Theme, string Descroption)
+        private SpeechSynthesizer synth = new SpeechSynthesizer();
+        private double SCREEN_WIDTH = SystemParameters.PrimaryScreenWidth;
+        private double SCREEN_HEIGHT = SystemParameters.PrimaryScreenHeight;
+        private Event Event;
+        public Popup(Event Event)
         {
             InitializeComponent();
             synth.SetOutputToDefaultAudioDevice();
-            textBlockTheme.Text = Theme;
-            textBlockDescription.Text = Descroption;
+            this.Event = Event;
             this.Top = SCREEN_HEIGHT; 
             this.Left = SCREEN_WIDTH - Width;
+           
+        }
+        private void Popup_Loaded(object sender, RoutedEventArgs e)
+        {
+            textBlockTheme.Text = Event.title;
+            textBlockDescription.Text = Event.description;
             MoveUp(10);
         }
+ 
 
         private void MoveUp(int step)
         {
@@ -45,7 +49,7 @@ namespace VotifyTest
 
         private void Wait(int step)
         {
-            synth.SpeakAsync(generateSpeechText(textBlockTheme.Text,textBlockDescription.Text));
+            synth.SpeakAsync(generateSpeechText(Event));
             DispatcherTimer timer = new DispatcherTimer();
             //Co sekunda sprawdzanie czy tekst został zakończony
             timer.Interval = TimeSpan.FromSeconds(1);
@@ -77,7 +81,7 @@ namespace VotifyTest
             timer.Start();
 
         }
-        private PromptBuilder generateSpeechText(string Thema,string Descroption)
+        private PromptBuilder generateSpeechText(Event _Event)
         {
             PromptBuilder TextSpeech = new PromptBuilder(new System.Globalization.CultureInfo("pl-PL"));
             TextSpeech.StartParagraph();
@@ -85,10 +89,10 @@ namespace VotifyTest
             TextSpeech.AppendText("Powiadomienie!");
             TextSpeech.EndSentence();
             TextSpeech.StartSentence();
-            TextSpeech.AppendText(Thema);
+            TextSpeech.AppendText(Event.title);
             TextSpeech.EndSentence();
             TextSpeech.StartSentence();
-            TextSpeech.AppendText(Descroption);
+            TextSpeech.AppendText(Event.description);
             TextSpeech.EndSentence();
             TextSpeech.EndParagraph();
 
