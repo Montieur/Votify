@@ -24,7 +24,7 @@ namespace VotifyTest.Models
             TrayIcon.Icon = SystemIcons.Exclamation;
             TrayIcon.Text = "Votify";
             TrayIcon.BalloonTipTitle = "Votify";
-            TrayIcon.BalloonTipText = "Od teraz Votify będzie pracowąć w tle..";
+            TrayIcon.BalloonTipText = "Od teraz Votify będzie pracować w tle..";
             TrayIcon.Visible = true;
   
 

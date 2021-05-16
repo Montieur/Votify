@@ -10,7 +10,7 @@ namespace VotifyTest
     {
         public Date Date { get; set; }
         public string Title{ get; set; }
-        public string Description;
+        public string Description { get; set; }
         private int Id;
 
         public Event(string Start, string End, string Title, string Description, int Id)
