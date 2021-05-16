@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VotifyTest.Views"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Votify" Height="450" Width="400" Closed="Window_Closed" ResizeMode="NoResize">
+        Title="Votify" Height="450" Width="400" Closed="Window_Closed" ResizeMode="CanMinimize" StateChanged="Window_StateChanged" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>

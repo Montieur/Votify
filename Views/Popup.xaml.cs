@@ -18,6 +18,7 @@ namespace VotifyTest
             this.Event = Event;
             this.Top = SCREEN_HEIGHT; 
             this.Left = SCREEN_WIDTH - Width;
+            this.Topmost = true;
            
         }
         private void Popup_Loaded(object sender, RoutedEventArgs e)

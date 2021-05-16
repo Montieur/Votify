@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VotifyTest"
         mc:Ignorable="d"
-        Title="WindowTestDeveloper" Height="450" Width="800" Closed="Window_Closed">
+        Title="WindowTestDeveloper" Height="450" Width="800" Closed="Window_Closed" Loaded="Window_Loaded" StateChanged="Window_StateChanged">
     <Grid>
         <TextBox x:Name="textBoxTitle" Text="Title" HorizontalAlignment="Left" Height="147" Margin="10,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="289"/>
         <TextBox x:Name="textBoxDescription" Text="Description" HorizontalAlignment="Left" Height="139" Margin="10,172,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="289"/>

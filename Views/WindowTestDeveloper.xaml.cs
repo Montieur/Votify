@@ -114,5 +114,35 @@ namespace VotifyTest
             var Event = Controller.CreateEvents(Token, textBoxTitle.Text, textBoxDescription.Text, getUnixDate(DateTime.UtcNow.AddMinutes(1)), getUnixDate(DateTime.UtcNow.AddMinutes(2)));
 
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Models.GLOBALS.TrayIcon.Click += (s, EventArgs) =>
+            {
+                if (this.Visibility == Visibility.Hidden && this == Models.GLOBALS.WindowUser)
+                {
+                    this.Show();
+                    this.WindowState = WindowState.Normal;
+                    this.Visibility = Visibility.Visible;
+                }
+            };
+        }
+
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            Models.GLOBALS.WindowUser = this;
+            if (this.WindowState == WindowState.Minimized && this == Models.GLOBALS.WindowUser)
+            {
+                Models.GLOBALS.TrayIcon.Visible = true;
+                Models.GLOBALS.TrayIcon.ShowBalloonTip(1);
+                this.Hide();
+            }
+            else
+            {
+                Models.GLOBALS.TrayIcon.Visible = false;
+                this.Show();
+            }
+        }
     }
 }

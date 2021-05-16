@@ -29,6 +29,7 @@ namespace VotifyTest.Views
             InitializeComponent();
             this.Token = Token;
             this.User = User;
+            Models.GLOBALS.WindowUser = this;
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -58,6 +59,36 @@ namespace VotifyTest.Views
             ListEvents.Visibility = Visibility.Collapsed;
             SettingsPane.Visibility = Visibility.Visible;
 
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Models.GLOBALS.TrayIcon.Click += (s, EventArgs) =>
+            {
+                if (this.Visibility == Visibility.Hidden && this == Models.GLOBALS.WindowUser)
+                {
+                    this.Show();
+                    this.WindowState = WindowState.Normal;
+                    this.Visibility = Visibility.Visible;
+                }
+            };
+        }
+
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            Models.GLOBALS.WindowUser = this;
+            if (this.WindowState == WindowState.Minimized && this == Models.GLOBALS.WindowUser)
+            {
+                Models.GLOBALS.TrayIcon.Visible = true;
+                Models.GLOBALS.TrayIcon.ShowBalloonTip(1);
+                this.Hide();
+            }
+            else
+            {
+                Models.GLOBALS.TrayIcon.Visible = false;
+                this.Show();
+            }
         }
     }
 }

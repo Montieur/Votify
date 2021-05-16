@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Speech.Synthesis;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using Newtonsoft.Json;
 
 
@@ -14,6 +16,21 @@ namespace VotifyTest.Models
     static class GLOBALS
     {
         public static SpeechSynthesizer synth = initSpeechSynthesizer();
+        public static NotifyIcon TrayIcon = InitNotifyIcon();
+        public static Window WindowUser;
+        public static NotifyIcon InitNotifyIcon()
+        {
+            NotifyIcon TrayIcon = new NotifyIcon();
+            TrayIcon.Icon = SystemIcons.Exclamation;
+            TrayIcon.Text = "Votify";
+            TrayIcon.BalloonTipTitle = "Votify";
+            TrayIcon.BalloonTipText = "Od teraz Votify będzie pracowąć w tle..";
+            TrayIcon.Visible = true;
+  
+
+            return TrayIcon;
+        }
+  
 
         private static SpeechSynthesizer initSpeechSynthesizer()
         {
@@ -50,7 +67,7 @@ namespace VotifyTest.Models
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
         }
         private static SpeechSynthesizer DeSerializeSpeechSynthesizerObject()
@@ -70,7 +87,7 @@ namespace VotifyTest.Models
                     catch(Exception e)
                     {
                         
-                        MessageBox.Show(e.Message);
+                        Console.WriteLine(e.Message);
                         return null;
                     }
 
