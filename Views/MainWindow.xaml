@@ -34,7 +34,7 @@
                         <TextBlock TextAlignment="Center">Dzisiejsze <LineBreak/> wydarzenia</TextBlock>
                     </Viewbox>
                 </Button>
-                <Button x:Name="ButtonSettings" Style="{StaticResource mButton}">
+                <Button x:Name="ButtonSettings" Click="ButtonSettings_Click" Style="{StaticResource mButton}">
                     <Viewbox>
                         <TextBlock TextAlignment="Center">Ustawienia</TextBlock>
                     </Viewbox>
@@ -48,7 +48,7 @@
 
             </StackPanel>
         </DockPanel>
-        <ListBox x:Name="ListEvents" Grid.Column="1" HorizontalContentAlignment="Stretch">
+        <ListBox x:Name="ListEvents" Grid.Column="1" HorizontalContentAlignment="Stretch" Visibility="Collapsed">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -61,25 +61,30 @@
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-
-            <!--<ListBoxItem HorizontalContentAlignment="Stretch">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0">
-                    nazwa eventu
-                    </TextBlock>
-                    <TextBlock Grid.Column="1">
-                        pora evnetu
-                    </TextBlock>
-                </Grid>
-            </ListBoxItem>-->
-
-            
-            
         </ListBox>
+
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="1" Grid.Row="0" Text="Wycisz narratora"/>
+            <TextBlock Grid.Column="1" Grid.Row="1" Text="Wyświetlaj powiadomienia w rogu ekranu"/>
+            <TextBlock Grid.Column="1" Grid.Row="2" Text="Wybierz narratora"/>
+            <TextBlock Grid.Column="1" Grid.Row="3" Text="Głośność narratora"/>
+            <TextBlock Grid.Column="1" Grid.Row="4"  Text="Wycisz powiadomienia"/>
+        </Grid>
+        
+        
         <Button x:Name="ButtonLogout" Grid.Row="1">
             <Viewbox>
                 <TextBlock Padding="3">Wyloguj się</TextBlock>

@@ -40,6 +40,7 @@ namespace VotifyTest.Views
         {
             Events = Controller.GetEventFromResponse(Token);
             listBoxEvents_addEvents();
+            ListEvents.Visibility = Visibility.Visible;
         }
 
         private void listBoxEvents_addEvents()
@@ -51,5 +52,10 @@ namespace VotifyTest.Views
             }
         }
 
+        private void ButtonSettings_Click(object sender, RoutedEventArgs e)
+        {
+            ListEvents.Visibility = Visibility.Collapsed;
+
+        }
     }
 }

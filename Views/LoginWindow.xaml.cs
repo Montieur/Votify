@@ -19,7 +19,7 @@ namespace VotifyTest
     /// </summary>
     public partial class LoginWindow : Window
     {
-        readonly bool debug = false;
+        readonly bool debug = true;
 
         public LoginWindow()
         {
