@@ -9,14 +9,13 @@ namespace VotifyTest
 {
     public partial class Popup : Window
     {
-        private SpeechSynthesizer synth = new SpeechSynthesizer();
+        private SpeechSynthesizer synth = Models.GLOBALS.synth;
         private double SCREEN_WIDTH = SystemParameters.PrimaryScreenWidth;
         private double SCREEN_HEIGHT = SystemParameters.PrimaryScreenHeight;
         private Event Event;
         public Popup(Event Event)
         {
             InitializeComponent();
-            synth.SetOutputToDefaultAudioDevice();
             this.Event = Event;
             this.Top = SCREEN_HEIGHT; 
             this.Left = SCREEN_WIDTH - Width;

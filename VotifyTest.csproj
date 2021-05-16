@@ -62,6 +62,7 @@
     <Compile Include="Models\Controller.cs" />
     <Compile Include="Models\DataFromAuthorization.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\GLOBALS.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -124,7 +125,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\V.png" />
+    <Resource Include="Resources\V.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
