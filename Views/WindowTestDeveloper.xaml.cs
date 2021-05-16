@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Speech.Synthesis;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,9 +34,6 @@ namespace VotifyTest
             this.User = User;
             InitTimerSynch();
             InitTimerDisplayPopup();
-
-
-
         }
         private void InitWhatIsTime()
         {
@@ -78,6 +76,7 @@ namespace VotifyTest
         }
         private void buttonInstantPopup_Click(object sender, RoutedEventArgs e)
         {
+            //MessageBox.Show(Models.GLOBALS.synth.Volume.ToString());
             Event TempEvent = new Event(new DateTime().ToString(), new DateTime().AddMinutes(1).ToString(), textBoxTitle.Text, textBoxDescription.Text, -1);
             Popup Popup = new Popup(TempEvent);
             Popup.Show();
@@ -85,6 +84,7 @@ namespace VotifyTest
 
         private void Window_Closed(object sender, EventArgs e)
         {
+            Models.GLOBALS.SerializeSpeechSynthesizerObject();
             Application.Current.Shutdown();
         }
 

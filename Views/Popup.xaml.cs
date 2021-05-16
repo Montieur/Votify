@@ -9,7 +9,6 @@ namespace VotifyTest
 {
     public partial class Popup : Window
     {
-        private SpeechSynthesizer synth = Models.GLOBALS.synth;
         private double SCREEN_WIDTH = SystemParameters.PrimaryScreenWidth;
         private double SCREEN_HEIGHT = SystemParameters.PrimaryScreenHeight;
         private Event Event;
@@ -48,12 +47,12 @@ namespace VotifyTest
 
         private void Wait(int step)
         {
-            synth.SpeakAsync(generateSpeechText(Event));
+            Models.GLOBALS.synth.SpeakAsync(generateSpeechText(Event));
             DispatcherTimer timer = new DispatcherTimer();
             //Co sekunda sprawdzanie czy tekst został zakończony
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += (s, e) => {
-                if (synth.GetCurrentlySpokenPrompt() == null)
+                if (Models.GLOBALS.synth.GetCurrentlySpokenPrompt() == null)
                 {
                     MoveDown(step);
                     timer.Stop();
