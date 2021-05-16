@@ -1,0 +1,93 @@
+﻿<Window x:Class="VotifyTest.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VotifyTest.Views"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+
+
+
+        <DockPanel>
+            <StackPanel Grid.Column="0" DockPanel.Dock="Top">
+                <StackPanel.Resources>
+                    <Style TargetType="Button" x:Key="mButton">
+                        <Setter Property="Padding" Value="20"/>
+                        <Setter Property="Height" Value="100"/>
+                    </Style>
+                </StackPanel.Resources>
+            
+                <Button x:Name="ButtonEvents" Click="ButtonEvents_Click" Style="{StaticResource mButton}">
+                    <Viewbox>
+                        <TextBlock TextAlignment="Center">Dzisiejsze <LineBreak/> wydarzenia</TextBlock>
+                    </Viewbox>
+                </Button>
+                <Button x:Name="ButtonSettings" Style="{StaticResource mButton}">
+                    <Viewbox>
+                        <TextBlock TextAlignment="Center">Ustawienia</TextBlock>
+                    </Viewbox>
+                </Button>
+            </StackPanel>
+            <StackPanel>
+                <Image Source="V.png" Width="48" Margin="30"/>
+                <Viewbox>
+                    <TextBlock Text="Votify" Padding="10 0"/>
+                </Viewbox>
+
+            </StackPanel>
+        </DockPanel>
+        <ListBox x:Name="ListEvents" Grid.Column="1" HorizontalContentAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding Title}"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Date}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+            <!--<ListBoxItem HorizontalContentAlignment="Stretch">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0">
+                    nazwa eventu
+                    </TextBlock>
+                    <TextBlock Grid.Column="1">
+                        pora evnetu
+                    </TextBlock>
+                </Grid>
+            </ListBoxItem>-->
+
+            
+            
+        </ListBox>
+        <Button x:Name="ButtonLogout" Grid.Row="1">
+            <Viewbox>
+                <TextBlock Padding="3">Wyloguj się</TextBlock>
+            </Viewbox>
+        </Button>
+        <Viewbox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right">
+            <TextBlock x:Name="TextUsername" Padding="2" Text="Użyszkodnik" TextAlignment="Right"/>
+        </Viewbox>
+        
+    </Grid>
+</Window>

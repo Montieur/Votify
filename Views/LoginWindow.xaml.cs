@@ -19,6 +19,7 @@ namespace VotifyTest
     /// </summary>
     public partial class LoginWindow : Window
     {
+        readonly bool debug = false;
 
         public LoginWindow()
         {
@@ -33,15 +34,22 @@ namespace VotifyTest
             if (response != null)
             {
                 this.Hide();
-                WindowTestDeveloper WindowTestDeveloper = new WindowTestDeveloper(response.Token,response.User);
-                WindowTestDeveloper.Show();
+                if (debug)
+                {
+                    WindowTestDeveloper WindowTestDeveloper = new WindowTestDeveloper(response.Token, response.User);
+                    WindowTestDeveloper.Show();
+                }
+                else
+                {
+                    Views.MainWindow mainWindow = new Views.MainWindow(response.Token, response.User);
+                    mainWindow.Show();
+                }
+
             }
             else
             {
                 MessageBox.Show("Wprowadzono niepoprawne dane logowania!");
             }
-            
-
         }
     }
 }
