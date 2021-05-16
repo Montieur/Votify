@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VotifyTest.Views"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="400">
+        Title="Votify" Height="450" Width="400" Closed="Window_Closed" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
@@ -41,7 +41,7 @@
                 </Button>
             </StackPanel>
             <StackPanel>
-                <Image Source="V.png" Width="48" Margin="30"/>
+                <Image Source="../Resources/V.png" Width="48" Margin="30"/>
                 <Viewbox>
                     <TextBlock Text="Votify" Padding="10 0"/>
                 </Viewbox>
@@ -63,28 +63,71 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Grid Grid.Column="1">
+        <Grid x:Name="SettingsPane" Grid.Column="1" Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="6*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Column="1" Grid.Row="0" Text="Wycisz narratora"/>
-            <TextBlock Grid.Column="1" Grid.Row="1" Text="Wyświetlaj powiadomienia w rogu ekranu"/>
-            <TextBlock Grid.Column="1" Grid.Row="2" Text="Wybierz narratora"/>
-            <TextBlock Grid.Column="1" Grid.Row="3" Text="Głośność narratora"/>
-            <TextBlock Grid.Column="1" Grid.Row="4"  Text="Wycisz powiadomienia"/>
+            <Viewbox Height="20" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <CheckBox/>
+            </Viewbox>
+
+            <Viewbox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <CheckBox/>
+            </Viewbox>
+
+            <Viewbox Height="25" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0">
+                <TextBlock Margin="5 0"  Text="Wycisz narratora"/>
+            </Viewbox>
+            <Viewbox Height="45" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1">
+                <TextBlock>
+                    Wyłącz wyświetlanie<LineBreak/> powiadomień w rogu ekranu
+                </TextBlock>
+            </Viewbox>
+
+            <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
+
+                <Viewbox Height="25" >
+                    <TextBlock Text="Głos narratora" />
+                </Viewbox>
+
+                <ComboBox Height="30" x:Name="ComboBoxVoices" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2">
+
+                </ComboBox>
+
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2">
+                <Viewbox Height="25" >
+                    <TextBlock Text="Głośność narratora"/>
+                </Viewbox>
+
+                <Slider Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Minimum="0" Maximum="100" TickFrequency="1" VerticalAlignment="Center" />
+
+            </StackPanel>
+
+            <StackPanel  Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2">
+
+                <Viewbox  Height="25">
+                    <TextBlock Text="Szybkość mowy narratora"/>
+                </Viewbox>
+
+                <Slider Minimum="-10" Maximum="10" TickFrequency="1" VerticalAlignment="Center"/>
+
+            </StackPanel>
+
         </Grid>
-        
-        
+
         <Button x:Name="ButtonLogout" Grid.Row="1">
             <Viewbox>
                 <TextBlock Padding="3">Wyloguj się</TextBlock>
