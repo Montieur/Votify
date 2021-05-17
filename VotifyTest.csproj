@@ -129,5 +129,8 @@
   <ItemGroup>
     <Resource Include="Resources\V.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\VotifyIcon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

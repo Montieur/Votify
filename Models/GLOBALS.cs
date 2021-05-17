@@ -21,7 +21,7 @@ namespace VotifyTest.Models
         public static NotifyIcon InitNotifyIcon()
         {
             NotifyIcon TrayIcon = new NotifyIcon();
-            TrayIcon.Icon = SystemIcons.Exclamation;
+            TrayIcon.Icon = new Icon(@"Resources/VotifyIcon.ico");
             TrayIcon.Text = "Votify";
             TrayIcon.BalloonTipTitle = "Votify";
             TrayIcon.BalloonTipText = "Od teraz Votify będzie pracować w tle..";

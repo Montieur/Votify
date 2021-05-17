@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,12 +20,13 @@ namespace VotifyTest
     /// </summary>
     public partial class LoginWindow : Window
     {
-        readonly bool debug = true;
+        readonly bool debug = !true;
 
         public LoginWindow()
         {
             InitializeComponent();
             Models.GLOBALS.WindowUser = this;
+           
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VotifyTest.Views"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Votify" Height="450" Width="400" Closed="Window_Closed" ResizeMode="CanMinimize" StateChanged="Window_StateChanged" Loaded="Window_Loaded">
+        Title="Votify" Height="450" Width="400" Closed="Window_Closed" ResizeMode="CanMinimize" StateChanged="Window_StateChanged" Loaded="Window_Loaded" Icon="/VotifyTest;component/Resources/VotifyIcon.ico" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
@@ -41,7 +41,7 @@
                 </Button>
             </StackPanel>
             <StackPanel>
-                <Image Source="../Resources/V.png" Width="48" Margin="30"/>
+                <Image Source="/VotifyTest;component/Resources/VotifyIcon.ico" Width="48" Margin="30"/>
                 <Viewbox>
                     <TextBlock Text="Votify" Padding="10 0"/>
                 </Viewbox>
