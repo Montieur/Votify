@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="LoginWindow" 
         Height="300" 
-        Width="450" Loaded="Window_Loaded" StateChanged="Window_StateChanged" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+        Width="450" Loaded="Window_Loaded" StateChanged="Window_StateChanged" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Closed="Window_Closed">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

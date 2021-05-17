@@ -34,6 +34,7 @@ namespace VotifyTest.Views
 
         private void Window_Closed(object sender, EventArgs e)
         {
+            Models.GLOBALS.TrayIcon.Dispose();
             Application.Current.Shutdown();
         }
 

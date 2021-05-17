@@ -34,6 +34,7 @@ namespace VotifyTest
             this.User = User;
             InitTimerSynch();
             InitTimerDisplayPopup();
+            Models.GLOBALS.WindowUser = this;
         }
         private void InitWhatIsTime()
         {
@@ -84,6 +85,7 @@ namespace VotifyTest
 
         private void Window_Closed(object sender, EventArgs e)
         {
+            Models.GLOBALS.TrayIcon.Dispose();
             Models.GLOBALS.SerializeSpeechSynthesizerObject();
             Application.Current.Shutdown();
         }
