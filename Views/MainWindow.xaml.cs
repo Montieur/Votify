@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,46 +12,54 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace VotifyTest
+namespace VotifyTest.Views
 {
     /// <summary>
-    /// Interaction logic for LoginWindow.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class MainWindow : Window
     {
-        readonly bool debug = !true;
-
-        public LoginWindow()
+        
+        int TimeStatus = 0;
+        private string Token;
+        private List<Event> Events;
+        private Models.User User;
+        public MainWindow(string Token, Models.User User)
         {
             InitializeComponent();
+            this.Token = Token;
+            this.User = User;
             Models.GLOBALS.WindowUser = this;
-           
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        private void Window_Closed(object sender, EventArgs e)
         {
+            Models.GLOBALS.TrayIcon.Dispose();
+            Application.Current.Shutdown();
+        }
 
-            Models.DataFromAuthorization response = Controller.Login(LoginBox.Text, PasswordBox.Password);
+        private void ButtonEvents_Click(object sender, RoutedEventArgs e)
+        {
+            Events = Controller.GetEventFromResponse(Token);
+            listBoxEvents_addEvents();
+            ListEvents.Visibility = Visibility.Visible;
+            SettingsPane.Visibility = Visibility.Collapsed;
+        }
 
-            if (response != null)
+        private void listBoxEvents_addEvents()
+        {
+            ListEvents.Items.Clear();
+            foreach (Event ev in Events)
             {
-                this.Hide();
-                if (debug)
-                {
-                    WindowTestDeveloper WindowTestDeveloper = new WindowTestDeveloper(response.Token, response.User);
-                    WindowTestDeveloper.Show();
-                }
-                else
-                {
-                    Views.MainWindow mainWindow = new Views.MainWindow(response.Token, response.User);
-                    mainWindow.Show();
-                }
+                ListEvents.Items.Add(ev);
+            }
+        }
 
-            }
-            else
-            {
-                MessageBox.Show("Wprowadzono niepoprawne dane logowania!");
-            }
+        private void ButtonSettings_Click(object sender, RoutedEventArgs e)
+        {
+            ListEvents.Visibility = Visibility.Collapsed;
+            SettingsPane.Visibility = Visibility.Visible;
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -73,7 +80,7 @@ namespace VotifyTest
         {
             Models.GLOBALS.WindowUser = this;
             if (this.WindowState == WindowState.Minimized && this == Models.GLOBALS.WindowUser)
-            { 
+            {
                 Models.GLOBALS.TrayIcon.Visible = true;
                 Models.GLOBALS.TrayIcon.ShowBalloonTip(1);
                 this.Hide();
@@ -83,12 +90,6 @@ namespace VotifyTest
                 Models.GLOBALS.TrayIcon.Visible = false;
                 this.Show();
             }
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            Models.GLOBALS.TrayIcon.Dispose();
-            Application.Current.Shutdown();
         }
     }
 }

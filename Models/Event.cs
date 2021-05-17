@@ -8,9 +8,9 @@ namespace VotifyTest
 {
     public class Event
     {
-        public Date Date;
-        public string Title;
-        public string Description;
+        public Date Date { get; set; }
+        public string Title{ get; set; }
+        public string Description { get; set; }
         private int Id;
 
         public Event(string Start, string End, string Title, string Description, int Id)
@@ -35,6 +35,11 @@ namespace VotifyTest
         {
             this.Start = DateTime.Parse(Start);
             this.End = DateTime.Parse(End);
+        }
+
+        public override string ToString()
+        {
+            return $"{Start.Hour}:{Start.Minute}";
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Speech.Synthesis;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,9 +34,7 @@ namespace VotifyTest
             this.User = User;
             InitTimerSynch();
             InitTimerDisplayPopup();
-
-
-
+            Models.GLOBALS.WindowUser = this;
         }
         private void InitWhatIsTime()
         {
@@ -78,6 +77,7 @@ namespace VotifyTest
         }
         private void buttonInstantPopup_Click(object sender, RoutedEventArgs e)
         {
+            //MessageBox.Show(Models.GLOBALS.synth.Volume.ToString());
             Event TempEvent = new Event(new DateTime().ToString(), new DateTime().AddMinutes(1).ToString(), textBoxTitle.Text, textBoxDescription.Text, -1);
             Popup Popup = new Popup(TempEvent);
             Popup.Show();
@@ -85,6 +85,8 @@ namespace VotifyTest
 
         private void Window_Closed(object sender, EventArgs e)
         {
+            Models.GLOBALS.TrayIcon.Dispose();
+            Models.GLOBALS.SerializeSpeechSynthesizerObject();
             Application.Current.Shutdown();
         }
 
@@ -113,6 +115,36 @@ namespace VotifyTest
             //MessageBox.Show();
             var Event = Controller.CreateEvents(Token, textBoxTitle.Text, textBoxDescription.Text, getUnixDate(DateTime.UtcNow.AddMinutes(1)), getUnixDate(DateTime.UtcNow.AddMinutes(2)));
 
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Models.GLOBALS.TrayIcon.Click += (s, EventArgs) =>
+            {
+                if (this.Visibility == Visibility.Hidden && this == Models.GLOBALS.WindowUser)
+                {
+                    this.Show();
+                    this.WindowState = WindowState.Normal;
+                    this.Visibility = Visibility.Visible;
+                }
+            };
+        }
+
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            Models.GLOBALS.WindowUser = this;
+            if (this.WindowState == WindowState.Minimized && this == Models.GLOBALS.WindowUser)
+            {
+                Models.GLOBALS.TrayIcon.Visible = true;
+                Models.GLOBALS.TrayIcon.ShowBalloonTip(1);
+                this.Hide();
+            }
+            else
+            {
+                Models.GLOBALS.TrayIcon.Visible = false;
+                this.Show();
+            }
         }
     }
 }

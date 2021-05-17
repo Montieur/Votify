@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VotifyTest"
         mc:Ignorable="d"
-        Title="LoginWindow" 
+        Title="Votify - Login Panel" 
         Height="300" 
-        Width="450">
+        Width="450" Loaded="Window_Loaded" StateChanged="Window_StateChanged" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Closed="Window_Closed" Icon="/VotifyTest;component/Resources/VotifyIcon.ico" >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
