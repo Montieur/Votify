@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Threading;
 using System.Speech.Synthesis;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace VotifyTest
 {
@@ -30,11 +31,12 @@ namespace VotifyTest
             this.Top = SCREEN_HEIGHT; 
             this.Left = SCREEN_WIDTH - Width;
             this.Topmost = true;
-           
+            this.Opacity = 0;
+
         }
         private void Popup_Loaded(object sender, RoutedEventArgs e)
         {
-            MoveUp(5);
+            MoveUp(10);
         }
 
         private void MoveUp(int step)
@@ -44,6 +46,7 @@ namespace VotifyTest
 
             timer.Tick += (s, e) => {
                 this.Top -= step;
+                this.Opacity += 0.04;
                 if(this.Top < SCREEN_HEIGHT - Height - TASKBAR_HEIGHT)
                 {
                     Wait(step);
@@ -77,6 +80,7 @@ namespace VotifyTest
             timer.Interval = TimeSpan.FromMilliseconds(1);
             timer.Tick += (s, e) => {
                 Top += step;
+                this.Opacity -= 0.04;
                 if (Top > SCREEN_HEIGHT)
                 {
                     timer.Stop();
