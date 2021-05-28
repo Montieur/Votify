@@ -36,6 +36,8 @@ namespace VotifyTest
         }
         private void Popup_Loaded(object sender, RoutedEventArgs e)
         {
+            if (Models.GLOBALS.popupSetting.hidePopup)
+                this.Hide();
             MoveUp(10);
         }
 
@@ -60,7 +62,13 @@ namespace VotifyTest
 
         private void Wait(int step)
         {
+            int _tempVolume = Models.GLOBALS.synth.Volume;
+            if (Models.GLOBALS.popupSetting.mutePopup)
+            {
+                Models.GLOBALS.synth.Volume = 0;
+            }
             Models.GLOBALS.synth.SpeakAsync(generateSpeechText(Event));
+            
             DispatcherTimer timer = new DispatcherTimer();
             //Co sekunda sprawdzanie czy tekst został zakończony
             timer.Interval = TimeSpan.FromSeconds(1);
@@ -68,6 +76,7 @@ namespace VotifyTest
                 if (Models.GLOBALS.synth.GetCurrentlySpokenPrompt() == null)
                 {
                     MoveDown(step);
+                    Models.GLOBALS.synth.Volume = _tempVolume;
                     timer.Stop();
                 }
             };
