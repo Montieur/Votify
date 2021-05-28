@@ -24,7 +24,6 @@ namespace VotifyTest.Views
         private string Token;
         private List<Event> Events;
         private Models.User User;
-        private bool VoiceIsLoading = false;
         public MainWindow(string Token, Models.User User)
         {
             InitializeComponent();
@@ -36,6 +35,9 @@ namespace VotifyTest.Views
         {
             SliderSpeedSpeech.Value = Models.GLOBALS.synth.Rate;
             SliderVolumeSpeech.Value = Models.GLOBALS.synth.Volume;
+            TextUsername.Text = User.UserName;
+            CheckBoxHidePopup.IsChecked = Models.GLOBALS.popupSetting.hidePopup;
+            CheckBoxMuteSpeech.IsChecked = Models.GLOBALS.popupSetting.mutePopup;
             Models.GLOBALS.TrayIcon.Click += (s, EventArgs) =>
             {
                 if (this.Visibility == Visibility.Hidden && this == Models.GLOBALS.WindowUser)
@@ -45,7 +47,6 @@ namespace VotifyTest.Views
                     this.Visibility = Visibility.Visible;
                 }
             };
-            VoiceIsLoading = true;
             foreach (InstalledVoice voice in Models.GLOBALS.synth.GetInstalledVoices())
             {
                 ComboBoxVoices.Items.Add(voice.VoiceInfo.Name);
@@ -55,7 +56,6 @@ namespace VotifyTest.Views
                 }
                
             }
-            VoiceIsLoading = false;
         }
 
 
@@ -122,6 +122,18 @@ namespace VotifyTest.Views
         {
                 Models.GLOBALS.synth.SelectVoice(ComboBoxVoices.SelectedItem.ToString());
                 Models.GLOBALS.SerializeSpeechSynthesizerObject();
+        }
+
+        private void CheckBoxMuteSpeech_Click(object sender, RoutedEventArgs e)
+        {
+            Models.GLOBALS.popupSetting.mutePopup = (bool)CheckBoxMuteSpeech.IsChecked;
+            Models.GLOBALS.SerializePopupSynthesizerObject();
+        }
+
+        private void CheckBoxHidePopup_Click(object sender, RoutedEventArgs e)
+        {
+            Models.GLOBALS.popupSetting.hidePopup = (bool)CheckBoxHidePopup.IsChecked;
+            Models.GLOBALS.SerializePopupSynthesizerObject();
         }
     }
 }

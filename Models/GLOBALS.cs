@@ -16,6 +16,7 @@ namespace VotifyTest.Models
     static class GLOBALS
     {
         public static SpeechSynthesizer synth = initSpeechSynthesizer();
+        public static PopupSetting popupSetting = initPopupSettingSynthesizer();
         public static NotifyIcon TrayIcon = InitNotifyIcon();
         public static Window WindowUser;
         public static NotifyIcon InitNotifyIcon()
@@ -109,11 +110,11 @@ namespace VotifyTest.Models
         }
         public class PopupSetting
         {
-            bool displayPopup;
-            bool mutePopup;
-            public PopupSetting(bool displayPopup, bool mutePopup)
+            public bool hidePopup;
+            public bool mutePopup;
+            public PopupSetting(bool hidePopup, bool mutePopup)
             {
-                this.displayPopup = displayPopup;
+                this.hidePopup = hidePopup;
                 this.mutePopup = mutePopup;
             }
         }
@@ -126,7 +127,7 @@ namespace VotifyTest.Models
             }
             else
             {
-                setting = new PopupSetting(true,true);
+                setting = new PopupSetting(false,false);
 
             }
 
@@ -138,14 +139,14 @@ namespace VotifyTest.Models
         {
             try
             {
-                string ObjectSerialized = JsonConvert.SerializeObject(synth);
+                string ObjectSerialized = JsonConvert.SerializeObject(popupSetting);
                 if (!File.Exists(@"config/"))
                 {
                     System.IO.Directory.CreateDirectory(@"config/");
                 }
-                if (File.Exists(@"config/synth.json"))
-                    File.Delete(@"config/synth.json");
-                FileStream FileStream = new FileStream(@"config/synth.json", FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
+                if (File.Exists(@"config/popupSetting.json"))
+                    File.Delete(@"config/popupSetting.json");
+                FileStream FileStream = new FileStream(@"config/popupSetting.json", FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
                 StreamWriter StreamWiter = new StreamWriter(FileStream);
                 StreamWiter.WriteLine(ObjectSerialized);
                 StreamWiter.Flush();
@@ -161,11 +162,11 @@ namespace VotifyTest.Models
         {
             try
             {
-                if (File.Exists(@"config/synth.json"))
+                if (File.Exists(@"config/popupSetting.json"))
                 {
                     try
                     {
-                        FileStream FileStream = new FileStream(@"config/synth.json", FileMode.Open, FileAccess.Read);
+                        FileStream FileStream = new FileStream(@"config/popupSetting.json", FileMode.Open, FileAccess.Read);
                         StreamReader StreamReader = new StreamReader(FileStream);
                         var ObjectDeSerialized = StreamReader.ReadToEnd();
                         StreamReader.Close();
