@@ -72,6 +72,7 @@ namespace VotifyTest.Models
                 Console.WriteLine(e.Message);
             }
         }
+
         private static SpeechSynthesizer DeSerializeSpeechSynthesizerObject()
         {
             try
@@ -106,6 +107,91 @@ namespace VotifyTest.Models
                 return null;
             }
         }
+        public class PopupSetting
+        {
+            bool displayPopup;
+            bool mutePopup;
+            public PopupSetting(bool displayPopup, bool mutePopup)
+            {
+                this.displayPopup = displayPopup;
+                this.mutePopup = mutePopup;
+            }
+        }
+        private static PopupSetting initPopupSettingSynthesizer()
+        {
+            PopupSetting setting;
+            if (DeSerializePopupSynthesizerObject() != null)
+            {
+                setting = DeSerializePopupSynthesizerObject();
+            }
+            else
+            {
+                setting = new PopupSetting(true,true);
+
+            }
+
+
+            return setting;
+        }
+
+        public static void SerializePopupSynthesizerObject()
+        {
+            try
+            {
+                string ObjectSerialized = JsonConvert.SerializeObject(synth);
+                if (!File.Exists(@"config/"))
+                {
+                    System.IO.Directory.CreateDirectory(@"config/");
+                }
+                if (File.Exists(@"config/synth.json"))
+                    File.Delete(@"config/synth.json");
+                FileStream FileStream = new FileStream(@"config/synth.json", FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
+                StreamWriter StreamWiter = new StreamWriter(FileStream);
+                StreamWiter.WriteLine(ObjectSerialized);
+                StreamWiter.Flush();
+                StreamWiter.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        private static PopupSetting DeSerializePopupSynthesizerObject()
+        {
+            try
+            {
+                if (File.Exists(@"config/synth.json"))
+                {
+                    try
+                    {
+                        FileStream FileStream = new FileStream(@"config/synth.json", FileMode.Open, FileAccess.Read);
+                        StreamReader StreamReader = new StreamReader(FileStream);
+                        var ObjectDeSerialized = StreamReader.ReadToEnd();
+                        StreamReader.Close();
+                        return JsonConvert.DeserializeObject<PopupSetting>(ObjectDeSerialized);
+                    }
+                    catch (Exception e)
+                    {
+
+                        Console.WriteLine(e.Message);
+                        return null;
+                    }
+
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
 
     }
 }
