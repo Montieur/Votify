@@ -59,6 +59,8 @@ namespace VotifyTest.Models
                 {
                     System.IO.Directory.CreateDirectory(@"config/");
                 }
+                if (File.Exists(@"config/synth.json"))
+                    File.Delete(@"config/synth.json");
                 FileStream FileStream = new FileStream(@"config/synth.json", FileMode.OpenOrCreate, FileAccess.Write,FileShare.None);
                 StreamWriter StreamWiter = new StreamWriter(FileStream);
                 StreamWiter.WriteLine(ObjectSerialized);

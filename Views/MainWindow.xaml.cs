@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Speech.Synthesis;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,10 +21,10 @@ namespace VotifyTest.Views
     public partial class MainWindow : Window
     {
         
-        int TimeStatus = 0;
         private string Token;
         private List<Event> Events;
         private Models.User User;
+        private bool VoiceIsLoading = false;
         public MainWindow(string Token, Models.User User)
         {
             InitializeComponent();
@@ -31,9 +32,36 @@ namespace VotifyTest.Views
             this.User = User;
             Models.GLOBALS.WindowUser = this;
         }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            SliderSpeedSpeech.Value = Models.GLOBALS.synth.Rate;
+            SliderVolumeSpeech.Value = Models.GLOBALS.synth.Volume;
+            Models.GLOBALS.TrayIcon.Click += (s, EventArgs) =>
+            {
+                if (this.Visibility == Visibility.Hidden && this == Models.GLOBALS.WindowUser)
+                {
+                    this.Show();
+                    this.WindowState = WindowState.Normal;
+                    this.Visibility = Visibility.Visible;
+                }
+            };
+            VoiceIsLoading = true;
+            foreach (InstalledVoice voice in Models.GLOBALS.synth.GetInstalledVoices())
+            {
+                ComboBoxVoices.Items.Add(voice.VoiceInfo.Name);
+                if (Models.GLOBALS.synth.Voice.Name == voice.VoiceInfo.Name)
+                {
+                    ComboBoxVoices.SelectedValue = voice.VoiceInfo.Name;
+                }
+               
+            }
+            VoiceIsLoading = false;
+        }
+
 
         private void Window_Closed(object sender, EventArgs e)
         {
+            Models.GLOBALS.SerializeSpeechSynthesizerObject();
             Models.GLOBALS.TrayIcon.Dispose();
             Application.Current.Shutdown();
         }
@@ -62,19 +90,6 @@ namespace VotifyTest.Views
 
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            Models.GLOBALS.TrayIcon.Click += (s, EventArgs) =>
-            {
-                if (this.Visibility == Visibility.Hidden && this == Models.GLOBALS.WindowUser)
-                {
-                    this.Show();
-                    this.WindowState = WindowState.Normal;
-                    this.Visibility = Visibility.Visible;
-                }
-            };
-        }
-
 
         private void Window_StateChanged(object sender, EventArgs e)
         {
@@ -90,6 +105,23 @@ namespace VotifyTest.Views
                 Models.GLOBALS.TrayIcon.Visible = false;
                 this.Show();
             }
+        }
+        private void SliderSpeedSpeech_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Models.GLOBALS.synth.Rate = (int)SliderSpeedSpeech.Value;
+            Models.GLOBALS.SerializeSpeechSynthesizerObject();
+        }
+
+        private void SliderVolumeSpeech_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Models.GLOBALS.synth.Volume = (int)SliderVolumeSpeech.Value;
+            Models.GLOBALS.SerializeSpeechSynthesizerObject();
+        }
+
+        private void ComboBoxVoices_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+                Models.GLOBALS.synth.SelectVoice(ComboBoxVoices.SelectedItem.ToString());
+                Models.GLOBALS.SerializeSpeechSynthesizerObject();
         }
     }
 }
