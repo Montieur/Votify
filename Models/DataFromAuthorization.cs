@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VotifyTest.Models
+namespace Votify.Models
 {
     public class DataFromAuthorization
     {

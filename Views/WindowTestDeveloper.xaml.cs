@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace VotifyTest
+namespace Votify
 {
     /// <summary>
     /// Logika interakcji dla klasy WindowTestDeveloper.xaml

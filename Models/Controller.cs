@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
 
-namespace VotifyTest
+namespace Votify
 {
     static public class Controller
     {

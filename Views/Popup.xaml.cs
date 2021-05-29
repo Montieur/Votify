@@ -6,7 +6,7 @@ using System.Speech.Synthesis;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace VotifyTest
+namespace Votify
 {
     public partial class Popup : Window
     {

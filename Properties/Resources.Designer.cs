@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 
-namespace VotifyTest.Properties
+namespace Votify.Properties
 {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
