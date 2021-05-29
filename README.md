@@ -18,7 +18,7 @@ The easiest way to use these samples without using Git is to download the zip fi
 
 ### Preview the layout
 
-<center> <img src="https://i.ibb.co/dm497zw/Screenshot-Login-Panel.png"><div style="text-align:center; color: blue"><small>Login Panel</small></div><br><img src="https://i.ibb.co/yp1WQkB/Screenshot-Main-Window.png"><div style="text-align:center; color: blue"><small>Main Window</small></div><br><img src="https://i.ibb.co/0GBMB9W/Screenshot-Popup.png"><div style="text-align:center; color: blue"><small>Popup</small></div></center>
+<center> <img src="https://i.ibb.co/FqsgDsg/Screenshot-5.png"><div style="text-align:center; color: blue"></div><br><img src="https://i.ibb.co/5Y8tv7F/Screenshot-3.png"><div style="text-align:center; color: blue"></div><br><img src="https://i.ibb.co/MsDjGtR/Screenshot-6.png"><div style="text-align:center; color: blue"></div></center>
 
 ## 
 Contact
@@ -28,3 +28,4 @@ Please let us know how this is working for you, or if you find any problems with
 **Paweł Podlasin** ([@Pudliszka](https://github.com/Pudliszka))
 
 **Albert Przytuła** ([@Montieur](https://github.com/Montieur))
+
