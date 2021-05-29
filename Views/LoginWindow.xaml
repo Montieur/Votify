@@ -36,12 +36,12 @@
 
         <StackPanel Grid.Row="2" Grid.Column="1">
             <Label Foreground="White" Content="Login:" FontSize="20" />
-            <TextBox x:Name="LoginBox" Text="login" HorizontalAlignment="Stretch" FontSize="24"/>
+            <TextBox x:Name="LoginBox" Text="" HorizontalAlignment="Stretch" FontSize="24"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Grid.Column="1" >
             <Label Foreground="White" Content="Hasło:" FontSize="20" Grid.Row="3" Grid.Column="1" />
-            <PasswordBox x:Name="PasswordBox" Password="password1" HorizontalAlignment="Stretch" FontSize="24" Grid.Row="4" Grid.Column="1"/>
+            <PasswordBox x:Name="PasswordBox" Password="" HorizontalAlignment="Stretch" FontSize="24" Grid.Row="4" Grid.Column="1"/>
         </StackPanel>
 
         <Button  Background="White" Foreground="Black" x:Name="LoginButton" Click="LoginButton_Click" Grid.Row="4" Grid.Column="1" Content="Zaloguj się" FontSize="20" Margin="50 20 50 0" Padding="5"/>

@@ -127,7 +127,6 @@ namespace Votify.Views
         {
             Models.GLOBALS.synth.SelectVoice(ComboBoxVoices.SelectedItem.ToString());
             Models.GLOBALS.SerializeSpeechSynthesizerObject();
-            MessageBox.Show(Models.GLOBALS.synth.Voice.Name);
         }
 
         private void CheckBoxMuteSpeech_Click(object sender, RoutedEventArgs e)
