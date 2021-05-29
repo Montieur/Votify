@@ -13,9 +13,13 @@
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
 
-            <Viewbox Grid.Row="0" Margin="5">
-                <TextBlock Text="{Binding Title}" HorizontalAlignment="Center"/>
-            </Viewbox>
+            <Border Background="#003830">
+                <Viewbox Grid.Row="0" Margin="5">
+                    <TextBlock Foreground="White" Text="{Binding Title}" HorizontalAlignment="Center"/>
+                </Viewbox>
+            </Border>
+            
+            
             <TextBlock FontSize="20" Grid.Row="1" Text="{Binding Description}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" Margin="10 0"/>
         </Grid>
     </Grid>

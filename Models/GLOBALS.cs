@@ -27,7 +27,6 @@ namespace Votify.Models
             TrayIcon.BalloonTipTitle = "Votify";
             TrayIcon.BalloonTipText = "Od teraz Votify będzie pracować w tle..";
             TrayIcon.Visible = true;
-  
 
             return TrayIcon;
         }

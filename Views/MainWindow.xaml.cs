@@ -30,6 +30,8 @@ namespace Votify.Views
             this.Token = Token;
             this.User = User;
             Models.GLOBALS.WindowUser = this;
+            Events = Controller.GetEventFromResponse(Token);
+            listBoxEvents_addEvents();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -70,7 +72,7 @@ namespace Votify.Views
         {
             Events = Controller.GetEventFromResponse(Token);
             listBoxEvents_addEvents();
-            ListEvents.Visibility = Visibility.Visible;
+            EventsPane.Visibility = Visibility.Visible;
             SettingsPane.Visibility = Visibility.Collapsed;
             ButtonEvents.Style = FindResource("mButtonActive") as Style;
             ButtonSettings.Style = FindResource("mButton") as Style;
@@ -87,7 +89,7 @@ namespace Votify.Views
 
         private void ButtonSettings_Click(object sender, RoutedEventArgs e)
         {
-            ListEvents.Visibility = Visibility.Collapsed;
+            EventsPane.Visibility = Visibility.Collapsed;
             SettingsPane.Visibility = Visibility.Visible;
             ButtonEvents.Style = FindResource("mButton") as Style;
             ButtonSettings.Style = FindResource("mButtonActive") as Style;
@@ -123,8 +125,9 @@ namespace Votify.Views
 
         private void ComboBoxVoices_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-                Models.GLOBALS.synth.SelectVoice(ComboBoxVoices.SelectedItem.ToString());
-                Models.GLOBALS.SerializeSpeechSynthesizerObject();
+            Models.GLOBALS.synth.SelectVoice(ComboBoxVoices.SelectedItem.ToString());
+            Models.GLOBALS.SerializeSpeechSynthesizerObject();
+            MessageBox.Show(Models.GLOBALS.synth.Voice.Name);
         }
 
         private void CheckBoxMuteSpeech_Click(object sender, RoutedEventArgs e)
@@ -137,6 +140,18 @@ namespace Votify.Views
         {
             Models.GLOBALS.popupSetting.hidePopup = (bool)CheckBoxHidePopup.IsChecked;
             Models.GLOBALS.SerializePopupSynthesizerObject();
+        }
+
+        private void ListEvents_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ListEvents.SelectedIndex > -1)
+                DescriptionArea.DataContext = Events[ListEvents.SelectedIndex];
+        }
+
+        private void ButtonPopupTest_Click(object sender, RoutedEventArgs e)
+        {
+            Popup Popup = new Popup(new Event(new DateTime().ToString(), new DateTime().AddMinutes(1).ToString(), "Przykładowy tytuł", "Przykładowy opis", -1));
+            Popup.Show();
         }
     }
 }

@@ -100,14 +100,14 @@ namespace Votify
             timer.Start();
         }
 
-        
 
         private PromptBuilder generateSpeechText(Event _Event)
         {
-            PromptBuilder TextSpeech = new PromptBuilder(new System.Globalization.CultureInfo("pl-PL"));
+            PromptBuilder TextSpeech = new PromptBuilder(Models.GLOBALS.synth.Voice.Culture);
             TextSpeech.StartParagraph();
             TextSpeech.StartSentence();
-            TextSpeech.AppendText("Powiadomienie!");
+            if (TextSpeech.Culture.Name == "en-US") TextSpeech.AppendText("Notification!");
+            else TextSpeech.AppendText("Powiadomienie!");
             TextSpeech.EndSentence();
             TextSpeech.StartSentence();
             TextSpeech.AppendText(Event.Title);
