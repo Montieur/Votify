@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace VotifyTest.Views
+namespace Votify.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -72,6 +72,8 @@ namespace VotifyTest.Views
             listBoxEvents_addEvents();
             ListEvents.Visibility = Visibility.Visible;
             SettingsPane.Visibility = Visibility.Collapsed;
+            ButtonEvents.Style = FindResource("mButtonActive") as Style;
+            ButtonSettings.Style = FindResource("mButton") as Style;
         }
 
         private void listBoxEvents_addEvents()
@@ -87,7 +89,8 @@ namespace VotifyTest.Views
         {
             ListEvents.Visibility = Visibility.Collapsed;
             SettingsPane.Visibility = Visibility.Visible;
-
+            ButtonEvents.Style = FindResource("mButton") as Style;
+            ButtonSettings.Style = FindResource("mButtonActive") as Style;
         }
 
 
