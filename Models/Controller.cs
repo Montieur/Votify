@@ -28,7 +28,20 @@ namespace Votify
                     METHOD: GET
                     URL: /api/auth/events
         */
-
+        public static bool TestNet()
+        {
+            try
+            {
+                var body = new Dictionary<string, string> {};
+                var content = new FormUrlEncodedContent(body);
+                var response = httpClient.PostAsync("http://127.0.0.1/api/authenticate", content).Result;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
         private static async Task<string> SendLoginRequest(string login, string password)
         {

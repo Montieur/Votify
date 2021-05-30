@@ -34,7 +34,8 @@ namespace Votify.Views
             this.Token = Token;
             this.User = User;
             Models.GLOBALS.WindowUser = this;
-            Events = Controller.GetEventFromResponse(Token);
+            if(Controller.TestNet())
+                Events = Controller.GetEventFromResponse(Token);
             listBoxEvents_addEvents();
             InitTimerDisplayPopup();
             InitTimerSynch();
@@ -61,7 +62,9 @@ namespace Votify.Views
             timerSynch = new System.Windows.Threading.DispatcherTimer();
             timerSynch.Interval = TimeSpan.FromSeconds(30);
             timerSynch.Tick += (s, e) => {
-                Events = Controller.GetEventFromResponse(Token);
+                if(Controller.TestNet())
+                    Events = Controller.GetEventFromResponse(Token);
+
                 listBoxEvents_addEvents();
             };
             timerSynch.Start();
@@ -105,7 +108,8 @@ namespace Votify.Views
 
         private void ButtonEvents_Click(object sender, RoutedEventArgs e)
         {
-            Events = Controller.GetEventFromResponse(Token);
+            if(Controller.TestNet())
+                Events = Controller.GetEventFromResponse(Token);
             listBoxEvents_addEvents();
             EventsPane.Visibility = Visibility.Visible;
             SettingsPane.Visibility = Visibility.Collapsed;
