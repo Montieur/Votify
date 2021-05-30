@@ -355,3 +355,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+Newtonsoft.Json.dll
+Newtonsoft.Json.xml
+VotifyTest.exe
+VotifyTest.exe.config
+VotifyTest.pdb

@@ -24,15 +24,53 @@ namespace Votify.Views
         private string Token;
         private List<Event> Events;
         private Models.User User;
+        private System.Windows.Threading.DispatcherTimer timerSynch;
+        private System.Windows.Threading.DispatcherTimer timerDisplayPopup;
+
+
         public MainWindow(string Token, Models.User User)
         {
             InitializeComponent();
             this.Token = Token;
             this.User = User;
             Models.GLOBALS.WindowUser = this;
-            Events = Controller.GetEventFromResponse(Token);
+            if(Controller.TestNet())
+                Events = Controller.GetEventFromResponse(Token);
             listBoxEvents_addEvents();
+            InitTimerDisplayPopup();
+            InitTimerSynch();
         }
+
+        private void InitTimerDisplayPopup()
+        {
+            timerDisplayPopup = new System.Windows.Threading.DispatcherTimer();
+            timerDisplayPopup.Interval = TimeSpan.FromSeconds(60);
+            timerDisplayPopup.Tick += (s, e) => {
+                foreach (Event ev in Events)
+                {
+                    if (ev.Date.Start.Hour == DateTime.Now.Hour && ev.Date.Start.Minute == DateTime.Now.Minute)
+                    {
+                        Popup Popup = new Popup(ev);
+                        Popup.Show();
+                    }
+                }
+            };
+            timerDisplayPopup.Start();
+        }
+        private void InitTimerSynch()
+        {
+            timerSynch = new System.Windows.Threading.DispatcherTimer();
+            timerSynch.Interval = TimeSpan.FromSeconds(30);
+            timerSynch.Tick += (s, e) => {
+                if(Controller.TestNet())
+                    Events = Controller.GetEventFromResponse(Token);
+
+                listBoxEvents_addEvents();
+            };
+            timerSynch.Start();
+        }
+
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             SliderSpeedSpeech.Value = Models.GLOBALS.synth.Rate;
@@ -70,7 +108,8 @@ namespace Votify.Views
 
         private void ButtonEvents_Click(object sender, RoutedEventArgs e)
         {
-            Events = Controller.GetEventFromResponse(Token);
+            if(Controller.TestNet())
+                Events = Controller.GetEventFromResponse(Token);
             listBoxEvents_addEvents();
             EventsPane.Visibility = Visibility.Visible;
             SettingsPane.Visibility = Visibility.Collapsed;

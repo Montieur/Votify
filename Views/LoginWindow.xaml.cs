@@ -31,28 +31,35 @@ namespace Votify
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-
-            Models.DataFromAuthorization response = Controller.Login(LoginBox.Text, PasswordBox.Password);
-
-            if (response != null)
+            if(Controller.TestNet())
             {
-                this.Hide();
-                if (debug)
+                Models.DataFromAuthorization response = Controller.Login(LoginBox.Text, PasswordBox.Password);
+
+                if (response != null)
                 {
-                    WindowTestDeveloper WindowTestDeveloper = new WindowTestDeveloper(response.Token, response.User);
-                    WindowTestDeveloper.Show();
+                    this.Hide();
+                    if (debug)
+                    {
+                        WindowTestDeveloper WindowTestDeveloper = new WindowTestDeveloper(response.Token, response.User);
+                        WindowTestDeveloper.Show();
+                    }
+                    else
+                    {
+                        Views.MainWindow mainWindow = new Views.MainWindow(response.Token, response.User);
+                        mainWindow.Show();
+                    }
+
                 }
                 else
                 {
-                    Views.MainWindow mainWindow = new Views.MainWindow(response.Token, response.User);
-                    mainWindow.Show();
+                    MessageBox.Show("Wprowadzono niepoprawne dane logowania!");
                 }
-
             }
             else
             {
-                MessageBox.Show("Wprowadzono niepoprawne dane logowania!");
+                MessageBox.Show("Sprawdź połączenia z internetem!","Brak połączenia z internetem",MessageBoxButton.OK,MessageBoxImage.Error,MessageBoxResult.OK);
             }
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
