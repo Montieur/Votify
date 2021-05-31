@@ -120,9 +120,12 @@ namespace Votify.Views
         private void listBoxEvents_addEvents()
         {
             ListEvents.Items.Clear();
-            foreach (Event ev in Events)
+            if(Events != null)
             {
-                ListEvents.Items.Add(ev);
+                foreach (Event ev in Events)
+                {
+                    ListEvents.Items.Add(ev);
+                }
             }
         }
 

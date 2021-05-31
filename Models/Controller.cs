@@ -147,10 +147,17 @@ namespace Votify
             EventsResponse.Dispose();
             List<Event> ListEvents = new List<Event>();
 
-            foreach(var element in parsedJSON["events"])
+            try
             {
-                Event _Temp = new Event((string)element["date"]["start"], (string)element["date"]["end"], (string)element["title"], (string)element["description"], (int)element["id"]);
-                ListEvents.Add(_Temp);
+                foreach(var element in parsedJSON["events"])
+                {
+                    Event _Temp = new Event((string)element["date"]["start"], (string)element["date"]["end"], (string)element["title"], (string)element["description"], (int)element["id"]);
+                    ListEvents.Add(_Temp);
+                }
+            }
+            catch
+            {
+                return null;
             }
 
             return ListEvents;
