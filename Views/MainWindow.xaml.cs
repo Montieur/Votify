@@ -46,6 +46,7 @@ namespace Votify.Views
             timerDisplayPopup = new System.Windows.Threading.DispatcherTimer();
             timerDisplayPopup.Interval = TimeSpan.FromSeconds(60);
             timerDisplayPopup.Tick += (s, e) => {
+                if(Events != null)
                 foreach (Event ev in Events)
                 {
                     if (ev.Date.Start.Hour == DateTime.Now.Hour && ev.Date.Start.Minute == DateTime.Now.Minute)

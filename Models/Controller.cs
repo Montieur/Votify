@@ -32,7 +32,7 @@ namespace Votify
         {
             try
             {
-                var body = new Dictionary<string, string> {};
+                var body = new Dictionary<string, string> { };
                 var content = new FormUrlEncodedContent(body);
                 var response = httpClient.PostAsync("http://127.0.0.1/api/authenticate", content).Result;
                 return true;
@@ -79,10 +79,10 @@ namespace Votify
             {
                 return null;
             }
-                
-           
 
-            
+
+
+
         }
         private static async Task<string> CreateEventsResponse(string Token, string Name, string Desc, string startDate, string endDate)
         {
@@ -107,19 +107,19 @@ namespace Votify
         }
 
 
-        public static bool CreateEvents(string Token,string Name,string Desc,string startDate,string endDate)
+        public static bool CreateEvents(string Token, string Name, string Desc, string startDate, string endDate)
         {
-            var Request = CreateEventsResponse(Token,  Name,  Desc,  startDate,  endDate);
+            var Request = CreateEventsResponse(Token, Name, Desc, startDate, endDate);
 
             if (Request.Status == TaskStatus.Created)
                 return true;
             else
                 return false;
-  
+
         }
         private static async Task<string> SendResponseEvent(string Token)
         {
-            if(!httpClient.DefaultRequestHeaders.Contains("Auth"))
+            if (!httpClient.DefaultRequestHeaders.Contains("Auth"))
                 httpClient.DefaultRequestHeaders.Add("Auth", Token);
 
             var requestMessage = new HttpRequestMessage
@@ -149,9 +149,12 @@ namespace Votify
 
             try
             {
-                foreach(var element in parsedJSON["events"])
+                foreach (var element in parsedJSON["events"])
                 {
-                    Event _Temp = new Event((string)element["date"]["start"], (string)element["date"]["end"], (string)element["title"], (string)element["description"], (int)element["id"]);
+                    Event _Temp;
+                    if (element["id"] != null)
+                        _Temp = new Event((string)element["date"]["start"], (string)element["date"]["end"], (string)element["title"], (string)element["description"], (int)element["id"]);
+                    else _Temp = new Event((string)element["date"]["start"], (string)element["date"]["end"], (string)element["title"], (string)element["description"], 100);
                     ListEvents.Add(_Temp);
                 }
             }
