@@ -25,13 +25,11 @@
 
         <DockPanel Grid.Row="1" Grid.Column="1">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Image Source="/VotifyTest;component/Resources/VotifyIconRed.ico" Width="64"/>
+                <Image Source="{StaticResource votifyIcon}" Width="64"/>
                 <Viewbox Height="64" Margin="20 10">
                     <TextBlock Foreground="White" Text="Votify"/>
                 </Viewbox>
             </StackPanel>
-            
-
         </DockPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="1">

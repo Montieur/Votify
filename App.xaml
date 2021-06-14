@@ -2,8 +2,12 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Votify"
-             StartupUri="Views/LoginWindow.xaml">
+             StartupUri="Views/LoginWindow.xaml"
+             DispatcherUnhandledException="Application_DispatcherUnhandledException"
+             >
+    
     <Application.Resources>
+        <ImageSource x:Key="votifyIcon">Resources/VotifyIconRed.ico</ImageSource>
         <Style TargetType="Button" x:Key="logoutButton">
             <Setter Property="Background" Value="#860000"/>
             <Setter Property="Foreground" Value="White"/>

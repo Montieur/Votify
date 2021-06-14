@@ -33,7 +33,7 @@
             </StackPanel>
             <StackPanel Background="#003830">
                 <StackPanel Margin="30">
-                    <Image Source="/VotifyTest;component/Resources/VotifyIconRed.ico" Width="64" />
+                    <Image Source="{StaticResource votifyIcon}" Width="64"/>
                 </StackPanel>
                 <Viewbox>
                     <TextBlock Foreground="White" Text="Votify" Padding="15 0"/>

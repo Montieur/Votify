@@ -151,7 +151,10 @@ namespace Votify
             {
                 foreach(var element in parsedJSON["events"])
                 {
-                    Event _Temp = new Event((string)element["date"]["start"], (string)element["date"]["end"], (string)element["title"], (string)element["description"], (int)element["id"]);
+                    Event _Temp;
+                    if (element["id"] != null)
+                    _Temp = new Event((string)element["date"]["start"], (string)element["date"]["end"], (string)element["title"], (string)element["description"], (int)element["id"]);
+                    else _Temp = new Event((string)element["date"]["start"], (string)element["date"]["end"], (string)element["title"], (string)element["description"], 100);
                     ListEvents.Add(_Temp);
                 }
             }

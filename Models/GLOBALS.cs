@@ -10,7 +10,6 @@ using System.Windows;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 
-
 namespace Votify.Models
 {
     static class GLOBALS
@@ -23,6 +22,7 @@ namespace Votify.Models
         {
             NotifyIcon TrayIcon = new NotifyIcon();
             TrayIcon.Icon = new Icon(@"Resources/VotifyIconRed.ico");
+            
             TrayIcon.Text = "Votify";
             TrayIcon.BalloonTipTitle = "Votify";
             TrayIcon.BalloonTipText = "Od teraz Votify będzie pracować w tle..";
